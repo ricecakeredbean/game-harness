@@ -58,7 +58,7 @@ node check.js remove <이름> [--force]     # worktree + 브랜치 삭제
 ## Studio MCP (Studio 내장)
 - 등록: Claude Code 사용자 범위 `Roblox_Studio` — Windows `cmd.exe /c %LOCALAPPDATA%\Roblox\mcp.bat` (Studio 업데이트로 버전 폴더가 바뀌어도 mcp.bat 이 찾아 줌). Mac 은 `/game-harness:harness-setup` 의 안내를 따른다.
 - Studio 쪽 스위치: 오른쪽 위 공유 버튼 옆 **고리 모양 아이콘(AI 어시스턴트)** → 패널 오른쪽 위 **…** → **설정** → **MCP 서버** 탭 → **Studio를 MCP 서버로 사용** (한국어 UI 기준. 영어 UI 는 Assistant → … → Manage MCP Servers → "Enable Studio as MCP server"). 메뉴·리본에는 없다. 아이콘을 누르면 패널이 열고 닫힌다.
-  - 꺼져 있으면 프록시가 "Timed out waiting for tools" 로 도구 0개. Studio 를 다시 켜면 꺼져 있을 수 있다 → **도구가 0개면 먼저 이 스위치를 확인**한다 (computer-use 가 있으면 매니저가 켠다).
+  - 꺼져 있으면 프록시가 "Timed out waiting for tools" 로 도구 0개. Studio 를 다시 켜면 꺼져 있을 수 있다 → **도구가 0개면 먼저 이 스위치를 확인**한다. 매니저·워커는 직접 클릭하지 않고, 사용자에게 "Studio 의 Assistant → … → 설정 → MCP 서버 → Studio를 MCP 서버로 사용 을 켜 주세요" 한 줄로 요청한 뒤 기다린다.
   - 켜면 다시 시작 없이 바로 도구가 잡힌다. 단 Claude Code 세션은 시작할 때 MCP 를 붙이므로 이미 열린 세션에는 안 생긴다 → 새 세션에서 쓴다.
   - 빠른 확인: `claude mcp get Roblox_Studio` → `✔ Connected` 면 정상, `Connected · tools fetch failed` 면 스위치가 꺼져 있거나 Studio 가 안 떠 있음.
 - 도구 (Studio 버전에 따라 다를 수 있다):
@@ -82,7 +82,7 @@ node check.js remove <이름> [--force]     # worktree + 브랜치 삭제
   - `inspect_instance` 경로는 점 표기(`Workspace.Baseplate`).
 - **실행 중 게임 조작은 디버그 브리지로**: Studio 명령창·`execute_luau` 에서 `require(모듈)` 하면 실행 중 게임과 **다른 모듈 사본**이 생겨 상태가 비어 보인다. 프로젝트에 Studio 전용 `ServerStorage.DebugBridge`(BindableFunction, `RunService:IsStudio()` 일 때만 생성)를 두고 `execute_luau`(Server)로 `game.ServerStorage.DebugBridge:Invoke("명령", 인자)` 를 부른다. 새 기능 태스크마다 워커가 확인용 명령을 브리지에 추가하게 브리프에 넣는다.
   - 출력 확인은 `get_console_output` 또는 Studio 로그 파일(Windows `%LOCALAPPDATA%\Roblox\logs\*Studio*_last.log` 의 `FLog::CreatorOutput` 줄)로.
-  - computer-use 로 플레이 버튼을 누를 땐 첫 클릭이 창 포커스로만 먹을 수 있다 → 플레이 상태를 캡처로 확인. MCP 가 있으면 `start_stop_play` 를 쓴다.
+  - **사용자 화면 조작 금지**: 플레이 검증에서 computer-use 등으로 실제 클릭·키 입력을 하지 않는다(사용자가 PC 를 못 쓰게 됨). 플레이 시작·중지는 `start_stop_play`, 입력은 `user_keyboard_input`·`user_mouse_input`(버튼은 instance_path 권장), 화면은 `screen_capture` 만 쓴다. MCP 입력은 실제 OS 커서·창 포커스를 건드리지 않는다(실측). 클릭 후 `UserInputService:GetMouseLocation()` 은 MCP 좌표를 반영하지 않으니 판정에 쓰지 않는다.
 - 사용 규칙:
   - **코드는 MCP 로 고치지 않는다.** `multi_edit` 은 Rojo 원본(`src/`)을 우회해 Studio 안 스크립트만 바꾸므로 금지. 코드 수정은 항상 파일 → Rojo 동기화. `script_read`·`script_grep` 은 동기화 확인용으로만.
   - 월드 작업(`insert_asset`, `generate_*`, `execute_luau` 로 파트 배치)은 main Studio 에서만 하고, 끝나면 사용자에게 `.rbxl` 저장을 요청한다 (MCP 로는 저장 도구가 없음).
