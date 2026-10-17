@@ -6,6 +6,7 @@
   "author": {
     "name": "game-harness contributors"
   },
+  "repository": "https://github.com/ricecakeredbean/game-harness",
   "keywords": [
     "harness",
     "manager",

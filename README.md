@@ -20,12 +20,12 @@ Claude Code 로 게임(Roblox / Unity)을 만들 때 쓰는 **"매니저 세션 
 터미널의 `claude` 에서:
 
 ```
-/plugin marketplace add <owner>/<repo>
+/plugin marketplace add ricecakeredbean/game-harness
 /plugin install game-harness@game-harness
 ```
 
-셸에서는 `claude plugin marketplace add <owner>/<repo>` 뒤 `claude plugin install game-harness@game-harness`.
-데스크톱 앱에서는 입력창 옆 **+** → **Plugins** → **Add marketplace** 에 `<owner>/<repo>` → **Add plugin**.
+셸에서는 `claude plugin marketplace add ricecakeredbean/game-harness` 뒤 `claude plugin install game-harness@game-harness`.
+데스크톱 앱에서는 입력창 옆 **+** → **Plugins** → **Add marketplace** 에 `ricecakeredbean/game-harness` → **Add plugin**.
 
 ## 셋업 (한 번)
 
