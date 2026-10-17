@@ -1,0 +1,4 @@
+# 줄 끝을 LF 로 고정 (stylua.toml 의 line_endings = "Unix" 와 맞춤. Windows worktree 에서 CRLF 로 풀리면 stylua 검사가 깨진다)
+* text=auto eol=lf
+*.rbxl binary
+*.rbxm binary

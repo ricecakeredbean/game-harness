@@ -1,0 +1,24 @@
+{
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "",
+      "depends_on": [],
+      "success_criteria": [
+        ""
+      ],
+      "acceptance": [
+        {
+          "check": "",
+          "expect": ""
+        }
+      ],
+      "status": "pending",
+      "worker": null,
+      "level": "L1",
+      "attempts": [],
+      "result_spec": null,
+      "notes": ""
+    }
+  ]
+}

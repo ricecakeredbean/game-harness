@@ -1,0 +1,9 @@
+# Rokit 가 관리하는 도구 버전 (https://github.com/rojo-rbx/rokit)
+# 아래 버전 조합으로 검증했다. 바꾸려면 `rokit add <도구>` 또는 이 파일을 고친 뒤 `rokit install`.
+
+[tools]
+rojo = "rojo-rbx/rojo@7.7.1"
+luau-lsp = "JohnnyMorganz/luau-lsp@1.70.1"
+selene = "Kampfkarren/selene@0.32.0"
+StyLua = "JohnnyMorganz/StyLua@2.6.0"
+lune = "lune-org/lune@0.11.0"

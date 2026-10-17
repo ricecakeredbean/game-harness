@@ -1,0 +1,14 @@
+{
+  "name": "game-harness",
+  "description": "Claude Code 게임 개발 하네스 (매니저 + 워커, Roblox/Unity)",
+  "owner": {
+    "name": "game-harness contributors"
+  },
+  "plugins": [
+    {
+      "name": "game-harness",
+      "source": "./",
+      "description": "매니저 + 워커 하네스 (Roblox/Unity)"
+    }
+  ]
+}

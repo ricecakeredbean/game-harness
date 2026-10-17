@@ -1,0 +1,7 @@
+# Roblox 플레이스 파일·잠금 파일 (월드는 .rbxl 에 있고 git 으로 병합하지 않는다)
+/*.rbxl
+/*.rbxlx
+/*.rbxl.lock
+/*.rbxlx.lock
+
+sourcemap.json
