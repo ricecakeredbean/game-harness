@@ -99,3 +99,6 @@ node check.js remove <이름> [--force]     # worktree + 브랜치 삭제
 
 ## 나중 후보
 - Open Cloud Luau Execution 으로 게시된 플레이스에서 헤드리스 테스트 (API 키는 사용자가 직접 환경변수로 넣는다. 매니저·워커는 키를 입력하지 않는다).
+- **실행 중 게임 조작은 디버그 브리지로**: Studio 명령창·`execute_luau` 에서 `require(모듈)` 하면 실행 중 게임과 **다른 모듈 사본**이 생겨 상태가 비어 보인다(몬스터 0마리 등). 프로젝트에 Studio 전용 `ServerStorage.DebugBridge`(BindableFunction, `RunService:IsStudio()` 일 때만 생성)를 두고 `execute_luau`(Server)로 `game.ServerStorage.DebugBridge:Invoke("명령", 인자)` 를 부른다. 새 기능 태스크마다 워커가 확인용 명령을 브리지에 추가하게 브리프에 넣는다.
+  - 출력 확인은 `get_console_output` 또는 Studio 로그 파일(`%LOCALAPPDATA%\Roblox\logs\*Studio*_last.log` 의 `FLog::CreatorOutput` 줄)로.
+  - **사용자 화면 조작 금지**: 플레이 검증에서 computer-use 등으로 실제 클릭·키 입력을 하지 않는다(사용자가 PC 를 못 쓰게 됨). 플레이 시작·중지는 `start_stop_play`, 입력은 `user_keyboard_input`·`user_mouse_input`(버튼은 instance_path 권장), 화면은 `screen_capture` 만 쓴다. MCP 입력은 실제 OS 커서·창 포커스를 건드리지 않는다(실측). 클릭 후 `UserInputService:GetMouseLocation()` 은 MCP 좌표를 반영하지 않으니 판정에 쓰지 않는다.

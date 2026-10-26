@@ -1,7 +1,7 @@
 {
   "name": "game-harness",
   "displayName": "Game Harness (manager + workers)",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "매니저 세션 1 + 워커 세션 N 하네스: manager 스킬(Roblox/Unity 프로필), 셋업 스킬, 완료 게이트(roblox-check·unity-check), lsp-relay 심볼 탐색 데몬",
   "author": {
     "name": "game-harness contributors"
